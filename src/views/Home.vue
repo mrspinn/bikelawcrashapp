@@ -21,19 +21,19 @@
     </v-fade-transition>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 
 export default {
-    name: 'Home',
-    data() {
-        return {
+  name: 'Home',
+  data () {
+    return {
 
-        }
-    },
-    computed: {
-        crashes() {
-            return this.$store.getters.getCrashReports;
-        }
-    },
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'getCurrentCrash'
+    ])
+  }
 }
 </script>

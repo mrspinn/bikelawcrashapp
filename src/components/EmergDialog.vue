@@ -29,11 +29,11 @@
 
 <script>
 export default {
-    data() {
-        return {
-            dialog: true,
-        }
+  data () {
+    return {
+      dialog: true
     }
+  }
 }
 </script>
 

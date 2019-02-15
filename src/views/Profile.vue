@@ -9,10 +9,10 @@
 </template>
 <script>
 export default {
-    name: 'Profile',
-    data() {
-        return {}
-    }
+  name: 'Profile',
+  data () {
+    return {}
+  }
 }
 
 </script>

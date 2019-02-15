@@ -1,17 +1,18 @@
 <template>
-    <v-container>
+    <v-container fluid>
+        <component :is="bottomNav"></component>
+        <div style="height: 56px;"></div>
         <v-bottom-nav
             :active.sync="bottomNav"
             :value="true"
-            absolute
-            color="transparent"
+            fixed
         >
         <v-layout row>
             <v-flex>
                 <v-btn
                     color="primary"
                     flat small
-                    value="vehicle"
+                    value="vehicleForm"
                     class="pa-1"
                 >
                     <span>Vehicle</span>
@@ -22,7 +23,7 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="police"
+                    value="policeForm"
                     class="pa-1"
                 >
                     <span>Police</span>
@@ -33,7 +34,7 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="witnesses"
+                    value="witnessForm"
                     class="pa-1"
                 >
                     <span>Witnesses</span>
@@ -44,7 +45,7 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="weather"
+                    value="weatherForm"
                     class="pa-1"
                 >
                     <span>Weather</span>
@@ -55,7 +56,7 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="bicycle"
+                    value="bicycleForm"
                     class="pa-1"
                 >
                     <span>Bicycle</span>
@@ -66,7 +67,7 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="other"
+                    value="otherForm"
                     class="pa-1"
                 >
                     <span>Other</span>
@@ -79,12 +80,27 @@
 </template>
 
 <script>
+import vehicleForm from '../components/forms/Vehicle'
+import policeForm from '../components/forms/Police'
+import weatherForm from '../components/forms/Weather'
+import witnessForm from '../components/forms/Witness'
+import otherForm from '../components/forms/Other'
+import bicycleForm from '../components/forms/Bicycle'
+
 export default {
-    data() {
-        return {
-            bottomNav: 'vehicle'
-        }
+  data () {
+    return {
+      bottomNav: 'vehicleForm'
     }
+  },
+  components: {
+    vehicleForm,
+    policeForm,
+    weatherForm,
+    witnessForm,
+    otherForm,
+    bicycleForm
+  }
 }
 </script>
 

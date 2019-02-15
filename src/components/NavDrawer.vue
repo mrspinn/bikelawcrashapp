@@ -20,28 +20,28 @@
 
 <script>
 export default {
-    data() {
-        return {
-            drawerItems: [
-                { icon: 'home', title: 'Home', linkpath: '/' },
-                { icon: 'add', title: 'New Crash Report', linkpath: '/new' },
-                { icon: 'person', title: 'Profile', linkpath: '/profile' },
-                { icon: 'color_lens', title: 'Colours', linkpath: '/colours' },
-            ],
-            localDrawer: this.value
-        }
-    },
-    props: { 
-        value: { type: Boolean } 
-    },
-    watch: {
-     value: function() {
-       this.localDrawer = this.value
-     },
-     localDrawer: function() {
-       this.$emit('input', this.localDrawer)
-     }
+  data () {
+    return {
+      drawerItems: [
+        { icon: 'home', title: 'Home', linkpath: '/' },
+        { icon: 'add', title: 'New Crash Report', linkpath: '/new' },
+        { icon: 'person', title: 'Profile', linkpath: '/profile' },
+        { icon: 'color_lens', title: 'Colours', linkpath: '/colours' }
+      ],
+      localDrawer: this.value
     }
+  },
+  props: {
+    value: { type: Boolean }
+  },
+  watch: {
+    value: function () {
+      this.localDrawer = this.value
+    },
+    localDrawer: function () {
+      this.$emit('input', this.localDrawer)
+    }
+  }
 }
 </script>
 

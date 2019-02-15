@@ -89,7 +89,7 @@
                                 <v-text-field
                                     color="grey darken-2"
                                     v-model="driverNumber"
-                                    label="Driver's Number"
+                                    label="Driver's Phone Number"
                                     prepend-icon="phone"
                                     single-line
                                 ></v-text-field>
@@ -121,7 +121,7 @@
                                 </v-card>
                             </v-flex>
                         </v-layout>
-                        
+
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -136,71 +136,72 @@
     </v-container>
 </template>
 <script>
-    import moment from 'moment'
-    import { mapActions } from 'vuex';
-    import EmergDialog from "../components/EmergDialog";
+import moment from 'moment'
+import { mapActions } from 'vuex'
+import EmergDialog from '../components/EmergDialog'
 
-    export default {
-        name: 'NewCrash',
-        data() {
-            return {
-                timeDialog: false,
-                dateDialog: false,
-                time: moment().format('LT'),
-                date: moment().format('ll'),
-                driverName: '',
-                driverNumber: '',
-                licensePlate: '',
-                location: {},
-                address: '',
-                marker: {},
-                placeSearch: null,
-                error: '',
-            }
-        },
-        computed: {
-            
-        },
-        methods: {
-            ...mapActions([
-                'createCrash',
-                'setEditing'
-            ]),
-            crashInit() {
-                this.createCrash({
-                    driverName: this.driverName,
-                    driverNUmber: this.driverNumber,
-                    licensePlate: this.licensePlate,
-                    location: this.location
-                })
-                .then(() => {
-                    this.setEditing(true)
-                })
-                .then(() => {
-                    this.$router.push('crashform')
-                });
-            }
-        },
-        components: {
-            EmergDialog
-        },
-        created() {
-            var vm = this;
-            var onSuccess = function(position) {
-                vm.location = { 
-                    'lat': position.coords.latitude,
-                    'lng': position.coords.longitude,
-                };
-                vm.marker = {
-                    'position': vm.location,
-                    'map': vm.$refs.map,
-                };
-            };
-            function onError(error) {
-                vm.error = "Unable to get GPS location"
-            }
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        }
+export default {
+  name: 'NewCrash',
+  data () {
+    return {
+      timeDialog: false,
+      dateDialog: false,
+      time: moment().format('LT'),
+      date: moment().format('ll'),
+      driverName: '',
+      driverNumber: '',
+      licensePlate: '',
+      location: {},
+      address: '',
+      marker: {},
+      placeSearch: null,
+      error: ''
     }
+  },
+  computed: {
+
+  },
+  methods: {
+    ...mapActions([
+      'createCrash',
+      'setEditing'
+    ]),
+    crashInit () {
+      this.createCrash({
+        driverName: this.driverName,
+        driverNUmber: this.driverNumber,
+        licensePlate: this.licensePlate,
+        location: this.location,
+        marker: this.marker
+      })
+        .then(() => {
+          this.setEditing(true)
+        })
+        .then(() => {
+          this.$router.push('crashform')
+        })
+    }
+  },
+  components: {
+    EmergDialog
+  },
+  created () {
+    var vm = this
+    var onSuccess = function (position) {
+      vm.location = {
+        'lat': position.coords.latitude,
+        'lng': position.coords.longitude
+      }
+      vm.marker = {
+        'position': vm.location,
+        'map': vm.$refs.map
+      }
+    }
+    function onError () {
+      vm.error = 'Unable to get GPS location'
+    }
+    navigator.geolocation.getCurrentPosition(onSuccess, onError)
+  }
+}
 
 </script>

@@ -19,21 +19,20 @@
 <script>
 
 export default {
-    data() {
-        return {
-            colours: []
-        }
-    },
-    mounted() {
-        for (var key in this.$vuetify.theme) {
-            if (this.$vuetify.theme.hasOwnProperty(key)) {
-                this.colours.push({
-                    'colour': key,
-                    'hex': this.$vuetify.theme[key],
-                });
-            }
-        }        
+  data () {
+    return {
+      colours: []
     }
+  },
+  mounted () {
+    for (var key in this.$vuetify.theme) {
+      if (this.$vuetify.theme.hasOwnProperty(key)) {
+        this.colours.push({
+          'colour': key,
+          'hex': this.$vuetify.theme[key]
+        })
+      }
+    }
+  }
 }
 </script>
-

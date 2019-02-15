@@ -10,29 +10,29 @@ Vue.use(Router)
 
 export default new Router({
   routes: [{
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      component: Profile
-    },
-    {
-      path: '/new',
-      name: 'new',
-      component: NewCrash
-    },
-    {
-      path: '/crashform',
-      name: 'crashform',
-      component: CrashForm
-    },
-    {
-      path: '/colours',
-      name: 'colours',
-      component: Colours
-    }
+    path: '/',
+    name: 'home',
+    component: Home
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile
+  },
+  {
+    path: '/new',
+    name: 'new',
+    component: NewCrash
+  },
+  {
+    path: '/crashform',
+    name: 'crashform',
+    component: CrashForm
+  },
+  {
+    path: '/colours',
+    name: 'colours',
+    component: Colours
+  }
   ]
 })

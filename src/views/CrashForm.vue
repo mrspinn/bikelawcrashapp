@@ -1,6 +1,13 @@
 <template>
     <v-container fluid>
-        <component :is="bottomNav"></component>
+        <v-window v-model="bottomNav">
+            <v-window-item v-for="form in forms" :key="form">
+                <keep-alive>
+                    <component :is="form" />
+                </keep-alive>
+            </v-window-item>
+        </v-window>
+                
         <div style="height: 56px;"></div>
         <v-bottom-nav
             :active.sync="bottomNav"
@@ -12,7 +19,6 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="vehicleForm"
                     class="pa-1"
                 >
                     <span>Vehicle</span>
@@ -23,7 +29,6 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="policeForm"
                     class="pa-1"
                 >
                     <span>Police</span>
@@ -34,7 +39,6 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="witnessForm"
                     class="pa-1"
                 >
                     <span>Witnesses</span>
@@ -45,7 +49,6 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="weatherForm"
                     class="pa-1"
                 >
                     <span>Weather</span>
@@ -56,7 +59,6 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="bicycleForm"
                     class="pa-1"
                 >
                     <span>Bicycle</span>
@@ -67,7 +69,6 @@
                 <v-btn
                     color="primary"
                     flat small
-                    value="otherForm"
                     class="pa-1"
                 >
                     <span>Other</span>
@@ -86,11 +87,21 @@ import weatherForm from '../components/forms/Weather'
 import witnessForm from '../components/forms/Witness'
 import otherForm from '../components/forms/Other'
 import bicycleForm from '../components/forms/Bicycle'
+import { mapGetters } from 'vuex';
 
 export default {
   data () {
     return {
-      bottomNav: 'vehicleForm'
+      bottomNav: 0,
+      transitionType: "scroll-x-reverse-transition",
+      forms: [
+          'vehicleForm',
+          'policeForm',
+          'witnessForm',
+          'weatherForm',
+          'bicycleForm',
+          'otherForm',
+      ]
     }
   },
   components: {
@@ -100,6 +111,31 @@ export default {
     witnessForm,
     otherForm,
     bicycleForm
+  },
+  computed: {
+      ...mapGetters([
+          'getCurrentCrash',
+      ]),
+      activeForm () {
+        switch (this.bottomNav) {
+          case 0: return 'vehicleForm'
+          case 1: return 'policeForm'
+          case 2: return 'witnessForm'
+          case 3: return 'weatherForm'
+          case 4: return 'bicycleForm'
+          case 5: return 'otherForm'
+        }
+      }
+  },
+  methods: {
+  },
+  created() {
+    navigator.notification.confirm('Hello', ()=>console.log("Hello"));
+      if (this.getCurrentCrash === null) {
+          console.log('Null Current Crash');
+          
+          this.$router.push('/')
+      }
   }
 }
 </script>

@@ -14,10 +14,6 @@
         <v-content>
             <router-view></router-view>
         </v-content>
-
-        <v-navigation-drawer temporary right v-model="rightDrawer" fixed>
-
-        </v-navigation-drawer>
     </v-app>
 </template>
 <script>
@@ -35,13 +31,13 @@ export default {
     route () {
       return this.$router.currentRoute
     }
-    // editing() {
-    //     return this.$router.currentRoute == '/crash'
-    // }
+  },
+  methods: {
+    
   },
   components: {
     NavDrawer
-  }
+  },
 }
 
 </script>

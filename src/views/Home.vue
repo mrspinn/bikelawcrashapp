@@ -6,7 +6,7 @@
                     My Crash Reports
                 </v-card-title>
                 <v-list>
-                    <v-list-tile v-for="(item, index) in crashes" :key="index">
+                    <v-list-tile v-for="(item, index) in getCrashes" :key="index">
                         <v-subheader>{{ item.date }}</v-subheader>
                     </v-list-tile>
                 </v-list>
@@ -32,7 +32,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getCurrentCrash'
+      'getCurrentCrash',
+      'getCrashes'
     ])
   }
 }

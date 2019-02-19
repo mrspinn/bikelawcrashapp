@@ -133,6 +133,19 @@
                 </v-layout>
             </v-flex>
         </v-layout>
+        <v-snackbar
+            v-model="snackbar"
+            bottom
+        >
+        {{ error }}
+        <v-btn
+            color="pink"
+            flat
+            @click="snackbar = false"
+        >
+            Close
+        </v-btn>
+        </v-snackbar>
     </v-container>
 </template>
 <script>
@@ -151,7 +164,7 @@ export default {
       driverName: '',
       driverNumber: '',
       licensePlate: '',
-      location: {},
+      location: {lat: 10, lng: 10},
       address: '',
       marker: {},
       placeSearch: null,
@@ -159,7 +172,16 @@ export default {
     }
   },
   computed: {
-
+      snackbar() {
+          return this.error !== '' ? true : false;
+      }
+  },
+  watch: {
+      error() {
+          setInterval(() => {
+              this.error = '';
+          }, 5000);
+      }
   },
   methods: {
     ...mapActions([
@@ -167,18 +189,19 @@ export default {
       'setEditing'
     ]),
     crashInit () {
-      this.createCrash({
-        driverName: this.driverName,
-        driverNUmber: this.driverNumber,
-        licensePlate: this.licensePlate,
-        location: this.location,
-        marker: this.marker
-      })
-        .then(() => {
-          this.setEditing(true)
+        const vm = this;
+        this.createCrash({
+            driverName: this.driverName,
+            driverNUmber: this.driverNumber,
+            licensePlate: this.licensePlate,
+            location: this.location,
+            marker: this.marker
         })
         .then(() => {
-          this.$router.push('crashform')
+            this.setEditing(true)
+        })
+        .then(() => {
+            this.$router.push('crashform')
         })
     }
   },
@@ -186,21 +209,10 @@ export default {
     EmergDialog
   },
   created () {
-    var vm = this
-    var onSuccess = function (position) {
-      vm.location = {
-        'lat': position.coords.latitude,
-        'lng': position.coords.longitude
-      }
-      vm.marker = {
-        'position': vm.location,
-        'map': vm.$refs.map
-      }
-    }
-    function onError () {
-      vm.error = 'Unable to get GPS location'
-    }
-    navigator.geolocation.getCurrentPosition(onSuccess, onError)
+    navigator.geolocation.getCurrentPosition((position)=>{
+        this.location = {'lat': position.coords.latitude, 'lng': position.coords.longitude}
+        this.marker = {'position': this.location,'map': this.$refs.map}
+    }, (err)=> this.error = err.message)
   }
 }
 

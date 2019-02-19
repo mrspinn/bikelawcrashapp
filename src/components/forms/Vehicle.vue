@@ -57,7 +57,6 @@ import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      driverName: '',
       ownerName: '',
       licensePlate: '',
       vehicleMake: '',
@@ -69,7 +68,22 @@ export default {
   computed: {
     ...mapGetters([
       'getCurrentCrash'
-    ])
+    ]),
+    driverName: {
+        get () {
+            return this.$store.state.crashes[this.getCurrentCrash].driverName
+        },
+        set (value) {
+            const obj = {
+                'prop': 'driverName',
+                'value': value,
+            }
+            this.$store.commit('updateValue', obj)
+        }
+    }
+  },
+  methods: {
+
   }
 }
 </script>

@@ -39,7 +39,11 @@ export default {
       weatherItems: ['Cloudy', 'Clear', 'Rainy', 'Snowy', 'Fog/Smog/Smoke', 'Sleet/Hail/Freezing Rain'],
       roadItems: ['Dry', 'Wet', 'Water (Standing)', 'Ice', 'Snow', 'Slush', 'Sand/Dirt/Gravel', 'Fuel/Oil'],
       lightItems: ['Daylight', 'Dusk', 'Dawn', 'Dark (Lighted Road)', 'Dark (Non-lighted Road)'],
-      windItems: ['None', 'Light Breeze', 'Gentle Breeze', 'Moderate Breeze', 'Strong Breeze', 'High Wind', 'Gale', 'Severe/Storm']
+      windItems: ['None', 'Light Breeze', 'Gentle Breeze', 'Moderate Breeze', 'Strong Breeze', 'High Wind', 'Gale', 'Severe/Storm'],
+      weather: '',
+      road: '',
+      light: '',
+      wind: '',
     }
   },
   computed: {
